@@ -1,5 +1,12 @@
-import Image from 'next/image';
+import TemplatesList from '@/components/shared/templates-list';
+import { NextPage } from 'next';
 
-export default function Home() {
-  return <main>New!!!</main>;
-}
+const HomePage: NextPage = () => {
+  return (
+    <div>
+      <TemplatesList />
+    </div>
+  );
+};
+
+export default HomePage;
