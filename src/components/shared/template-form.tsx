@@ -1,11 +1,6 @@
 'use client';
 import { useState } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import Highlight from '@tiptap/extension-highlight';
-import TextAlign from '@tiptap/extension-text-align';
-import Placeholder from '@tiptap/extension-placeholder';
-import Underline from '@tiptap/extension-underline';
 import EditorToolbar from './editor-toolbar';
 import { Input } from '../ui/input';
 import {
@@ -19,6 +14,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Info } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { Template } from '@/lib/type-definitions';
+import { editorExtensions } from '@/lib/editor-extensions';
 
 interface TemplateFormProps {
   isEditMode?: boolean;
@@ -30,34 +26,17 @@ const TemplateForm = ({
   templateData,
 }: TemplateFormProps) => {
   const router = useRouter();
+
   const editor = useEditor({
     content: templateData?.body ?? '',
-    extensions: [
-      StarterKit.configure({
-        bulletList: {
-          keepMarks: true,
-          keepAttributes: true,
-        },
-        orderedList: {
-          keepMarks: true,
-          keepAttributes: true,
-        },
-      }),
-      TextAlign.configure({
-        types: ['heading', 'paragraph'],
-      }),
-      Highlight,
-      Underline,
-      Placeholder.configure({
-        placeholder: 'Start making your template',
-      }),
-    ],
+    extensions: editorExtensions,
   });
   const [title, setTitle] = useState<string>(templateData?.title ?? '');
 
   const saveTemplate = () => {
     const htmlOutput = editor?.getHTML();
     const jsonOutput = editor?.getJSON();
+
     console.log(jsonOutput);
     if (!htmlOutput || !title || editor?.isEmpty) {
       toast.error('Please fill the required fields');
@@ -84,6 +63,7 @@ const TemplateForm = ({
       saveTemplateToLocalStorage(template);
     }
 
+    // After successful submission, clear the inputs and naviage to the home page
     setTitle('');
     editor?.chain().clearContent().run();
     router.push('/');
@@ -96,7 +76,7 @@ const TemplateForm = ({
         <AlertTitle>Reminder!</AlertTitle>
         <AlertDescription>
           You can make dynamic data for the template by adding key name between
-          two curly braces. Like this {`{key_name}`}.
+          two curly braces like {`{key_name}`}.
         </AlertDescription>
       </Alert>
       <div className="flex items-center gap-2">
@@ -111,10 +91,14 @@ const TemplateForm = ({
           {isEditMode ? 'Edit & Save' : 'Save'}
         </Button>
       </div>
+
+      {/* Rich Text Editor */}
       <div>
-        <section className="mb-2">
+        <section className="mb-4">
+          {/* Fixed Editor Toolbar */}
           {editor && <EditorToolbar editor={editor} />}
         </section>
+        {/* Editor Bubble Menubar */}
         {editor && <EditorBubbleMenu editor={editor} />}
         <EditorContent editor={editor} />
       </div>

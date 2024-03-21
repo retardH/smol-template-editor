@@ -51,7 +51,7 @@ const TemplatesList = () => {
           );
         })
       ) : (
-        <div className="text-center">
+        <div className="my-4 text-center">
           {`Currently, no template was made yet. Please create one first.`}
         </div>
       )}
