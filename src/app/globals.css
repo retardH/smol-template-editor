@@ -75,6 +75,8 @@
   }
 }
 
+/* Manual styling for the tiptap editor */
+
 .ProseMirror-focused {
   outline: none !important;
 }

@@ -34,10 +34,6 @@ const EditorToolbar = ({ editor }: EditorToolbarProps) => {
     editor.chain().focus().toggleHeading({ level: level }).run();
   };
 
-  const handleBoldBtnClick = () => {
-    editor.chain().focus().toggleBold().run();
-  };
-
   const handleAlignBtnClick = (type: string) => {
     editor.chain().focus().setTextAlign(type).run();
   };
