@@ -3,7 +3,7 @@ import { getTemplatesFromLocalStorage } from '@/lib/utils';
 import { Button } from '../ui/button';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Template } from '@/lib/type-definitions';
+import { Template } from '@/lib/types';
 
 const TemplatesList = () => {
   const router = useRouter();

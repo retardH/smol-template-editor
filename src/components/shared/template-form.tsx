@@ -13,7 +13,7 @@ import EditorBubbleMenu from './editor-bubble-menu';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Info } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { Template } from '@/lib/type-definitions';
+import { Template } from '@/lib/types';
 import { editorExtensions } from '@/lib/editor-extensions';
 
 interface TemplateFormProps {
@@ -71,8 +71,8 @@ const TemplateForm = ({
 
   return (
     <div className="flex flex-col gap-4">
-      <Alert>
-        <Info />
+      <Alert className="border-yellow-400">
+        <Info className="stroke-yellow-400" />
         <AlertTitle>Reminder!</AlertTitle>
         <AlertDescription>
           You can make dynamic data for the template by adding key name between
@@ -81,8 +81,8 @@ const TemplateForm = ({
       </Alert>
       <div className="flex items-center gap-2">
         <Input
-          placeholder="Your Template Title"
-          className="grow border-none px-0 text-base font-semibold focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 lg:text-xl xl:text-2xl"
+          placeholder="Enter Your Template Title"
+          className="grow border-none px-0 text-base font-semibold shadow-none ring-0 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 lg:text-xl xl:text-2xl"
           required
           value={title}
           onChange={(e) => setTitle(e.target.value)}
